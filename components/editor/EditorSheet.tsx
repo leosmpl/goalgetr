@@ -12,6 +12,7 @@ import ColorsTab    from "./tabs/ColorsTab";
 import UploadTab    from "./tabs/UploadTab";
 import TemplatesTab from "./tabs/TemplatesTab";
 import FiltersTab   from "./tabs/FiltersTab";
+import { TabBar, TabButton } from "./TabBar";
 
 // ─── Tab icons (sourced from Figma node 17786:9512) ───────────────────────
 
@@ -133,39 +134,20 @@ export default function EditorSheet({
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 35 }}
     >
-      {/* ── Tab navigation (Figma: border-b row, brand-primary underline) ── */}
-      <nav
-        className="flex flex-shrink-0 border-b border-border-primary"
-        aria-label="Editor sections"
-      >
-        {TABS.map((tab) => {
-          const isActive = tab.id === activeTab;
-          return (
-            <button
-              key={tab.id}
-              onClick={() => onTabChange(tab.id)}
-              aria-label={tab.label}
-              aria-current={isActive ? "page" : undefined}
-              className={`
-                relative flex-1 flex items-center justify-center h-14
-                transition-colors duration-150 focus-visible:outline-none
-                focus-visible:ring-2 focus-visible:ring-bg-brand-primary
-                ${isActive ? "text-text-primary" : "text-text-tertiary hover:text-text-secondary"}
-              `}
-            >
-              {tab.icon(isActive)}
-              {/* Active underline — brand-primary, absolute bottom */}
-              {isActive && (
-                <motion.div
-                  layoutId="tab-indicator"
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-bg-brand-primary"
-                  transition={{ type: "spring", stiffness: 500, damping: 35 }}
-                />
-              )}
-            </button>
-          );
-        })}
-      </nav>
+      {/* ── Tab navigation — TabBar / TabButton (Figma: node 17791-1956) ── */}
+      <TabBar>
+        {TABS.map((tab) => (
+          <TabButton
+            key={tab.id}
+            id={tab.id}
+            active={tab.id === activeTab}
+            label={tab.label}
+            onClick={() => onTabChange(tab.id)}
+          >
+            {tab.icon(tab.id === activeTab)}
+          </TabButton>
+        ))}
+      </TabBar>
 
       {/* ── Tab panels ── */}
       <div className="flex-1 relative overflow-hidden">
