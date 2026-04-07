@@ -13,6 +13,7 @@ import UploadTab    from "./tabs/UploadTab";
 import TemplatesTab from "./tabs/TemplatesTab";
 import FiltersTab   from "./tabs/FiltersTab";
 import { TabBar, TabButton } from "./TabBar";
+import ButtonPrimary from "@/components/ui/ButtonPrimary";
 
 // ─── Tab icons (sourced from Figma node 17786:9512) ───────────────────────
 
@@ -195,23 +196,13 @@ export default function EditorSheet({
 
       {/* ── Save button ── */}
       <div className="flex-shrink-0 px-space-4 pb-space-4 pt-space-2">
-        <motion.button
-          onClick={onSave}
-          whileTap={{ scale: 0.97 }}
+        <ButtonPrimary
+          label={isDirty ? "Save" : "No changes"}
+          size="md"
+          fullWidth
           disabled={!isDirty}
-          className={`
-            w-full py-space-3 rounded-radius-full text-size-sm font-semibold
-            transition-colors duration-200
-            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
-            focus-visible:ring-offset-bg-secondary focus-visible:ring-bg-brand-primary
-            ${isDirty
-              ? "bg-bg-brand-primary text-border-white"
-              : "bg-bg-tertiary text-text-tertiary cursor-not-allowed"
-            }
-          `}
-        >
-          {isDirty ? "Save" : "No changes"}
-        </motion.button>
+          onClick={onSave}
+        />
       </div>
     </motion.div>
   );
