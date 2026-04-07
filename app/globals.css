@@ -182,6 +182,33 @@ input[type="range"] {
 }
 
 /* ─────────────────────────────────────────────────────────────
+   Card template layout transitions
+───────────────────────────────────────────────────────────── */
+.transition-template {
+  transition: all 0.3s ease;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Marquee / Text Run animation
+   Applied to player name when card.textRun === true
+───────────────────────────────────────────────────────────── */
+@keyframes marquee {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.marquee-text {
+  display: inline-block;
+  animation: marquee 3s linear infinite;
+}
+
+/* ─────────────────────────────────────────────────────────────
    Respect reduced-motion preference
 ───────────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {

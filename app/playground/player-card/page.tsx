@@ -63,6 +63,10 @@ function buildCard(k: KnobState): PlayerCardData {
     cardColor: k.cardColor,
     stats: { SKA: k.skaStat, SHO: k.shoStat, PUC: k.pucStat, GAM: k.gamStat, FIT: k.fitStat, CHA: k.chaStat },
     badges: k.badges,
+    template: "classic",
+    filter: "none",
+    textRun: false,
+    blurAmount: 0,
   };
 }
 

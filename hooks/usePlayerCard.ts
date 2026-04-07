@@ -8,6 +8,8 @@ import type {
   PlayerCardData,
   StatKey,
   BadgeType,
+  CardTemplate,
+  CardFilter,
 } from "@/lib/types";
 import { CARD_COLOR_PRESETS } from "@/lib/colorPresets";
 
@@ -23,12 +25,16 @@ const DEFAULT_CARD: PlayerCardData = {
   cardColor: CARD_COLOR_PRESETS[0].value, // Ember / Yellow/500
   stats: { SKA: 82, SHO: 79, PUC: 85, GAM: 88, FIT: 74, CHA: 91 },
   badges: ["Captain", "Dangler"],
+  template: "classic",
+  filter: "none",
+  textRun: false,
+  blurAmount: 0,
 };
 
 const INITIAL_STATE: EditorState = {
   card: DEFAULT_CARD,
   isFlipped: false,
-  activeTab: "colors",
+  activeTab: "upload",
   isDirty: false,
 };
 
@@ -66,12 +72,20 @@ function reducer(state: EditorState, action: EditorAction): EditorState {
     case "TOGGLE_BADGE": {
       const { badges } = state.card;
       const exists = badges.includes(action.payload);
-      if (!exists && badges.length >= MAX_BADGES) return state; // max enforced silently
+      if (!exists && badges.length >= MAX_BADGES) return state;
       const next = exists
         ? badges.filter((b) => b !== action.payload)
         : [...badges, action.payload];
       return { ...state, isDirty: true, card: { ...state.card, badges: next } };
     }
+    case "SET_TEMPLATE":
+      return { ...state, isDirty: true, card: { ...state.card, template: action.payload } };
+    case "SET_FILTER":
+      return { ...state, isDirty: true, card: { ...state.card, filter: action.payload } };
+    case "TOGGLE_TEXT_RUN":
+      return { ...state, isDirty: true, card: { ...state.card, textRun: !state.card.textRun } };
+    case "SET_BLUR":
+      return { ...state, isDirty: true, card: { ...state.card, blurAmount: action.payload } };
     case "TOGGLE_FLIP":
       return { ...state, isFlipped: !state.isFlipped };
     case "SET_TAB":
@@ -79,7 +93,7 @@ function reducer(state: EditorState, action: EditorAction): EditorState {
     case "MARK_SAVED":
       return { ...state, isDirty: false };
     case "HYDRATE":
-      return { ...state, card: action.payload, isDirty: false };
+      return { ...state, card: { ...DEFAULT_CARD, ...action.payload }, isDirty: false };
     default:
       return state;
   }
@@ -117,12 +131,16 @@ export function usePlayerCard() {
   }, [state.card.stats]);
 
   // Actions
-  const flipCard    = useCallback(() => dispatch({ type: "TOGGLE_FLIP" }), []);
-  const setTab      = useCallback((tab: EditorTab) => dispatch({ type: "SET_TAB", payload: tab }), []);
+  const flipCard     = useCallback(() => dispatch({ type: "TOGGLE_FLIP" }), []);
+  const setTab       = useCallback((tab: EditorTab) => dispatch({ type: "SET_TAB", payload: tab }), []);
   const setCardColor = useCallback((hex: string) => dispatch({ type: "SET_CARD_COLOR", payload: hex }), []);
-  const setPhoto    = useCallback((b64: string | null) => dispatch({ type: "SET_PHOTO", payload: b64 }), []);
-  const setTeamLogo = useCallback((b64: string | null) => dispatch({ type: "SET_TEAM_LOGO", payload: b64 }), []);
-  const toggleBadge = useCallback((badge: BadgeType) => dispatch({ type: "TOGGLE_BADGE", payload: badge }), []);
+  const setPhoto     = useCallback((b64: string | null) => dispatch({ type: "SET_PHOTO", payload: b64 }), []);
+  const setTeamLogo  = useCallback((b64: string | null) => dispatch({ type: "SET_TEAM_LOGO", payload: b64 }), []);
+  const toggleBadge  = useCallback((badge: BadgeType) => dispatch({ type: "TOGGLE_BADGE", payload: badge }), []);
+  const setTemplate  = useCallback((tpl: CardTemplate) => dispatch({ type: "SET_TEMPLATE", payload: tpl }), []);
+  const setFilter    = useCallback((f: CardFilter) => dispatch({ type: "SET_FILTER", payload: f }), []);
+  const toggleTextRun = useCallback(() => dispatch({ type: "TOGGLE_TEXT_RUN" }), []);
+  const setBlur      = useCallback((v: number) => dispatch({ type: "SET_BLUR", payload: v }), []);
 
   const updateField = useCallback(
     (field: keyof PlayerCardData, value: string | number | null) => {
@@ -156,10 +174,10 @@ export function usePlayerCard() {
   }, [state.card]);
 
   return {
-    card:          state.card,
-    isFlipped:     state.isFlipped,
-    activeTab:     state.activeTab,
-    isDirty:       state.isDirty,
+    card:           state.card,
+    isFlipped:      state.isFlipped,
+    activeTab:      state.activeTab,
+    isDirty:        state.isDirty,
     overallRating,
     flipCard,
     setTab,
@@ -170,6 +188,10 @@ export function usePlayerCard() {
     setPhoto,
     setTeamLogo,
     toggleBadge,
+    setTemplate,
+    setFilter,
+    toggleTextRun,
+    setBlur,
     save,
   };
 }

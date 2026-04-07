@@ -4,25 +4,50 @@ import { motion, AnimatePresence } from "framer-motion";
 import type {
   EditorTab,
   PlayerCardData,
-  StatKey,
-  BadgeType,
+  CardTemplate,
+  CardFilter,
 } from "@/lib/types";
 
 import ColorsTab    from "./tabs/ColorsTab";
-import IdentityTab  from "./tabs/IdentityTab";
-import AvatarTab    from "./tabs/AvatarTab";
-import PositionTab  from "./tabs/PositionTab";
-import TeamTab      from "./tabs/TeamTab";
+import UploadTab    from "./tabs/UploadTab";
+import TemplatesTab from "./tabs/TemplatesTab";
+import FiltersTab   from "./tabs/FiltersTab";
 
-// ─── Tab config ───────────────────────────────────────────────────────────
-interface TabConfig {
-  id: EditorTab;
-  label: string;
-  icon: React.ReactNode;
+// ─── Tab icons (sourced from Figma node 17786:9512) ───────────────────────
+
+function CameraIcon({ solid }: { solid?: boolean }) {
+  return solid ? (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M20 5h-2.586l-2-2H8.586l-2 2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm-8 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/>
+    </svg>
+  ) : (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+      <circle cx="12" cy="13" r="4" />
+    </svg>
+  );
 }
 
-function PaletteIcon() {
-  return (
+function CardsIcon({ solid }: { solid?: boolean }) {
+  return solid ? (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="2" y="4" width="13" height="17" rx="2"/>
+      <path d="M17 7h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-3V7z" opacity="0.5"/>
+    </svg>
+  ) : (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="4" width="13" height="17" rx="2" />
+      <path d="M17 7h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-3" />
+    </svg>
+  );
+}
+
+function PaletteIcon({ solid }: { solid?: boolean }) {
+  return solid ? (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 8 6.5 8 8 8.67 8 9.5 7.33 11 6.5 11zm3-4C8.67 7 8 6.33 8 5.5S8.67 4 9.5 4s1.5.67 1.5 1.5S10.33 7 9.5 7zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 4 14.5 4s1.5.67 1.5 1.5S15.33 7 14.5 7zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 8 17.5 8s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+    </svg>
+  ) : (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <circle cx="12" cy="12" r="10" />
       <circle cx="8.5" cy="9.5" r="1.5" fill="currentColor" stroke="none" />
@@ -32,46 +57,37 @@ function PaletteIcon() {
   );
 }
 
-function PersonIcon() {
-  return (
+function SlidersIcon({ solid }: { solid?: boolean }) {
+  return solid ? (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M3 5h2V3H3v2zm0 8h2v-2H3v2zm0 8h2v-2H3v2zm4 0h14v-2H7v2zm0-8h14v-2H7v2zm0-10v2h14V3H7z" opacity="0.4"/>
+      <circle cx="10" cy="6" r="2.5"/>
+      <circle cx="16" cy="14" r="2.5"/>
+    </svg>
+  ) : (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="12" cy="8" r="4" />
-      <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="4" y1="12" x2="20" y2="12" />
+      <line x1="4" y1="18" x2="20" y2="18" />
+      <circle cx="10" cy="6"  r="2" fill="var(--bg-secondary)" />
+      <circle cx="16" cy="12" r="2" fill="var(--bg-secondary)" />
+      <circle cx="8"  cy="18" r="2" fill="var(--bg-secondary)" />
     </svg>
   );
 }
 
-function CameraIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-      <circle cx="12" cy="13" r="4" />
-    </svg>
-  );
-}
-
-function StarIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-    </svg>
-  );
-}
-
-function ShieldIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-    </svg>
-  );
+// ─── Tab config ───────────────────────────────────────────────────────────
+interface TabConfig {
+  id: EditorTab;
+  label: string;
+  icon: (solid: boolean) => React.ReactNode;
 }
 
 const TABS: TabConfig[] = [
-  { id: "colors",   label: "Colors",    icon: <PaletteIcon /> },
-  { id: "identity", label: "Identity",  icon: <PersonIcon /> },
-  { id: "avatar",   label: "Avatar",    icon: <CameraIcon /> },
-  { id: "position", label: "Position",  icon: <StarIcon /> },
-  { id: "team",     label: "Team",      icon: <ShieldIcon /> },
+  { id: "upload",    label: "Upload",    icon: (s) => <CameraIcon solid={s} />  },
+  { id: "templates", label: "Templates", icon: (s) => <CardsIcon solid={s} />   },
+  { id: "colors",    label: "Colors",    icon: (s) => <PaletteIcon solid={s} /> },
+  { id: "filters",   label: "Filters",   icon: (s) => <SlidersIcon solid={s} /> },
 ];
 
 // ─── Tab panel slide variants ─────────────────────────────────────────────
@@ -83,39 +99,35 @@ const tabVariants = {
 
 // ─── Props ────────────────────────────────────────────────────────────────
 interface EditorSheetProps {
-  activeTab: EditorTab;
-  card: PlayerCardData;
-  overallRating: number;
-  onTabChange: (tab: EditorTab) => void;
-  onColorChange: (hex: string) => void;
-  onFieldChange: (field: keyof PlayerCardData, value: string | number) => void;
-  onStatChange: (key: StatKey, value: number) => void;
-  onPhotoChange: (base64: string | null) => void;
-  onTeamLogoChange: (base64: string | null) => void;
-  onBadgeToggle: (badge: BadgeType) => void;
-  onPositionChange: (pos: PlayerCardData["position"]) => void;
-  onSave: () => void;
-  isDirty: boolean;
+  activeTab:        EditorTab;
+  card:             PlayerCardData;
+  onTabChange:      (tab: EditorTab) => void;
+  onColorChange:    (hex: string) => void;
+  onPhotoChange:    (base64: string | null) => void;
+  onTemplateChange: (t: CardTemplate) => void;
+  onFilterChange:   (f: CardFilter) => void;
+  onTextRunToggle:  () => void;
+  onBlurChange:     (v: number) => void;
+  onSave:           () => void;
+  isDirty:          boolean;
 }
 
 export default function EditorSheet({
   activeTab,
   card,
-  overallRating,
   onTabChange,
   onColorChange,
-  onFieldChange,
-  onStatChange,
   onPhotoChange,
-  onTeamLogoChange,
-  onBadgeToggle,
-  onPositionChange,
+  onTemplateChange,
+  onFilterChange,
+  onTextRunToggle,
+  onBlurChange,
   onSave,
   isDirty,
 }: EditorSheetProps) {
   return (
     <motion.div
-      className="flex flex-col bg-bg-secondary rounded-t-radius-8 overflow-hidden"
+      className="flex flex-col bg-bg-secondary rounded-t-[var(--radius-10)] overflow-hidden"
       style={{ height: "380px" }}
       initial={{ y: "100%" }}
       animate={{ y: 0 }}
@@ -126,8 +138,11 @@ export default function EditorSheet({
         <div className="w-10 h-1 rounded-radius-full bg-bg-quaternary" />
       </div>
 
-      {/* ── Tab navigation ── */}
-      <nav className="flex gap-space-1 px-space-3 pb-space-2 flex-shrink-0" aria-label="Editor sections">
+      {/* ── Tab navigation (Figma: border-b row, brand-primary underline) ── */}
+      <nav
+        className="flex flex-shrink-0 border-b border-border-primary"
+        aria-label="Editor sections"
+      >
         {TABS.map((tab) => {
           const isActive = tab.id === activeTab;
           return (
@@ -137,21 +152,18 @@ export default function EditorSheet({
               aria-label={tab.label}
               aria-current={isActive ? "page" : undefined}
               className={`
-                relative flex-1 flex flex-col items-center gap-[3px] py-space-2 rounded-radius-4
+                relative flex-1 flex items-center justify-center h-14
                 transition-colors duration-150 focus-visible:outline-none
                 focus-visible:ring-2 focus-visible:ring-bg-brand-primary
-                ${isActive
-                  ? "text-text-primary bg-bg-tertiary"
-                  : "text-text-tertiary hover:text-text-secondary"
-                }
+                ${isActive ? "text-text-primary" : "text-text-tertiary hover:text-text-secondary"}
               `}
             >
-              {tab.icon}
-              {/* Active underline */}
+              {tab.icon(isActive)}
+              {/* Active underline — brand-primary, absolute bottom */}
               {isActive && (
                 <motion.div
                   layoutId="tab-indicator"
-                  className="absolute bottom-1 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-radius-full bg-bg-brand-primary"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-bg-brand-primary"
                   transition={{ type: "spring", stiffness: 500, damping: 35 }}
                 />
               )}
@@ -161,7 +173,7 @@ export default function EditorSheet({
       </nav>
 
       {/* ── Tab panels ── */}
-      <div className="flex-1 panel-scroll overflow-hidden relative">
+      <div className="flex-1 relative overflow-hidden">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={activeTab}
@@ -170,41 +182,34 @@ export default function EditorSheet({
             animate="animate"
             exit="exit"
             transition={{ duration: 0.18, ease: "easeInOut" }}
-            className="absolute inset-0 panel-scroll px-space-4 py-space-3"
+            className="absolute inset-0 panel-scroll px-space-4 py-space-4"
           >
-            {activeTab === "colors" && (
-              <ColorsTab cardColor={card.cardColor} onColorChange={onColorChange} />
-            )}
-            {activeTab === "identity" && (
-              <IdentityTab
-                card={card}
-                overallRating={overallRating}
-                onFieldChange={onFieldChange}
-                onStatChange={onStatChange}
-              />
-            )}
-            {activeTab === "avatar" && (
-              <AvatarTab
+            {activeTab === "upload" && (
+              <UploadTab
                 photoUrl={card.photoUrl}
-                teamLogoUrl={card.teamLogoUrl}
                 onPhotoChange={onPhotoChange}
-                onTeamLogoChange={onTeamLogoChange}
               />
             )}
-            {activeTab === "position" && (
-              <PositionTab
-                position={card.position}
-                badges={card.badges}
-                onPositionChange={onPositionChange}
-                onBadgeToggle={onBadgeToggle}
+            {activeTab === "templates" && (
+              <TemplatesTab
+                template={card.template}
+                onTemplateChange={onTemplateChange}
               />
             )}
-            {activeTab === "team" && (
-              <TeamTab
-                teamName={card.teamName}
-                teamLogoUrl={card.teamLogoUrl}
-                onTeamNameChange={(v) => onFieldChange("teamName", v)}
-                onTeamLogoChange={onTeamLogoChange}
+            {activeTab === "colors" && (
+              <ColorsTab
+                cardColor={card.cardColor}
+                onColorChange={onColorChange}
+              />
+            )}
+            {activeTab === "filters" && (
+              <FiltersTab
+                filter={card.filter}
+                textRun={card.textRun}
+                blurAmount={card.blurAmount}
+                onFilterChange={onFilterChange}
+                onTextRunToggle={onTextRunToggle}
+                onBlurChange={onBlurChange}
               />
             )}
           </motion.div>
@@ -218,7 +223,7 @@ export default function EditorSheet({
           whileTap={{ scale: 0.97 }}
           disabled={!isDirty}
           className={`
-            w-full py-space-4 rounded-radius-full text-size-base font-semibold
+            w-full py-space-3 rounded-radius-full text-size-sm font-semibold
             transition-colors duration-200
             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
             focus-visible:ring-offset-bg-secondary focus-visible:ring-bg-brand-primary

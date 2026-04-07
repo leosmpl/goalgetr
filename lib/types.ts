@@ -3,6 +3,12 @@ export type BadgeType = "Captain" | "Dangler" | "Sniper" | "Playmaker" | "Enforc
 
 export type StatKey = "SKA" | "SHO" | "PUC" | "GAM" | "FIT" | "CHA";
 
+/** Card layout template */
+export type CardTemplate = "classic" | "modern" | "stats";
+
+/** CSS filter preset applied to the photo area */
+export type CardFilter = "none" | "noir" | "heritage" | "gameday";
+
 export interface PlayerStats {
   SKA: number;
   SHO: number;
@@ -24,10 +30,18 @@ export interface PlayerCardData {
   cardColor: string;
   stats: PlayerStats;
   badges: BadgeType[];
+  /** Layout template — classic / modern / stats */
+  template: CardTemplate;
+  /** CSS filter preset — none / noir / heritage / gameday */
+  filter: CardFilter;
+  /** When true, player first name scrolls as a marquee */
+  textRun: boolean;
+  /** backdrop-filter blur in px applied to the accent background box (0-20) */
+  blurAmount: number;
 }
 
 // ─── Editor State ──────────────────────────────────────────────────────────
-export type EditorTab = "colors" | "identity" | "avatar" | "position" | "team";
+export type EditorTab = "upload" | "templates" | "colors" | "filters";
 
 // ─── Reducer Actions ──────────────────────────────────────────────────────
 export type EditorAction =
@@ -41,6 +55,10 @@ export type EditorAction =
   | { type: "SET_TEAM_LOGO"; payload: string | null }
   | { type: "SET_STAT"; payload: { key: StatKey; value: number } }
   | { type: "TOGGLE_BADGE"; payload: BadgeType }
+  | { type: "SET_TEMPLATE"; payload: CardTemplate }
+  | { type: "SET_FILTER"; payload: CardFilter }
+  | { type: "TOGGLE_TEXT_RUN" }
+  | { type: "SET_BLUR"; payload: number }
   | { type: "TOGGLE_FLIP" }
   | { type: "SET_TAB"; payload: EditorTab }
   | { type: "MARK_SAVED" }

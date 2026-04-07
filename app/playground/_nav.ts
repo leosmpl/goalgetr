@@ -31,6 +31,11 @@ export const COMPONENT_NAV: NavItem[] = [
     href: "/playground/device-chrome",
     description: "iOS status bar & home indicator safe-area components",
   },
+  {
+    name: "Card Editor Sheet",
+    href: "/playground/card-editor-sheet",
+    description: "4-tab interactive editor panel: Upload, Templates, Colors, Filters",
+  },
 ];
 
 export const NAV_ITEMS: NavItem[] = [...SYSTEM_NAV, ...COMPONENT_NAV];
