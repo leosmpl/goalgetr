@@ -41,6 +41,11 @@ export const COMPONENT_NAV: NavItem[] = [
     href: "/playground/tab-bar",
     description: "Reusable TabBar + TabButton with animated active underline",
   },
+  {
+    name: "Button Primary",
+    href: "/playground/button-primary",
+    description: "Primary CTA — 3 sizes, enabled / hover / disabled states, optional icons",
+  },
 ];
 
 export const NAV_ITEMS: NavItem[] = [...SYSTEM_NAV, ...COMPONENT_NAV];
