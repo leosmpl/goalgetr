@@ -28,7 +28,7 @@ export default function CardEditorPage() {
 
   return (
     /* ── Workbench ── */
-    <div className="editor-layout min-h-[100dvh] w-full flex items-center justify-center bg-bg-tertiary">
+    <div className="editor-layout h-[100dvh] w-full overflow-hidden flex items-center justify-center bg-bg-tertiary">
 
       {/* ── Device frame 402 × 874 ── */}
       <div
