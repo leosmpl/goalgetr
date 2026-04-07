@@ -26,6 +26,11 @@ export const COMPONENT_NAV: NavItem[] = [
     href: "/playground/player-card",
     description: "Flippable trading card with front/back faces",
   },
+  {
+    name: "Device Chrome",
+    href: "/playground/device-chrome",
+    description: "iOS status bar & home indicator safe-area components",
+  },
 ];
 
 export const NAV_ITEMS: NavItem[] = [...SYSTEM_NAV, ...COMPONENT_NAV];

@@ -23,3 +23,4 @@ yarn-error.log*
 
 # local
 .claude/settings.local.json
+.vercel

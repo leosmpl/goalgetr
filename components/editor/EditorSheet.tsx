@@ -116,7 +116,7 @@ export default function EditorSheet({
   return (
     <motion.div
       className="flex flex-col bg-bg-secondary rounded-t-radius-8 overflow-hidden"
-      style={{ height: "52dvh" }}
+      style={{ height: "380px" }}
       initial={{ y: "100%" }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 35 }}
