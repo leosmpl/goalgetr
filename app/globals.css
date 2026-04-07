@@ -175,6 +175,14 @@ body {
 }
 
 /* ─────────────────────────────────────────────────────────────
+   Horizontal swatch scroll row (ColorsTab)
+   Needs a CSS class because inline styles can't target ::-webkit-scrollbar
+───────────────────────────────────────────────────────────── */
+.swatch-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
    Range input accent — maps to bg-brand-primary token value
    (inline accent-color cannot reference CSS vars in all browsers)
 ───────────────────────────────────────────────────────────── */

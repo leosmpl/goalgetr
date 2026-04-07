@@ -146,49 +146,66 @@ export default function EditorSheet({
         ))}
       </TabBar>
 
-      {/* ── Tab panels ── */}
-      <div className="flex-1 relative overflow-hidden">
-        <AnimatePresence mode="wait" initial={false}>
+      {/* ── Colors tab — rendered OUTSIDE the overflow-hidden panel wrapper
+           so the horizontal swatch scroll row is never clipped ── */}
+      <AnimatePresence mode="wait" initial={false}>
+        {activeTab === "colors" && (
           <motion.div
-            key={activeTab}
+            key="colors"
             variants={tabVariants}
             initial="initial"
             animate="animate"
             exit="exit"
             transition={{ duration: 0.18, ease: "easeInOut" }}
-            className="absolute inset-0 panel-scroll px-space-4 py-space-4"
+            className="flex-1 flex flex-col min-h-0"
           >
-            {activeTab === "upload" && (
-              <UploadTab
-                photoUrl={card.photoUrl}
-                onPhotoChange={onPhotoChange}
-              />
-            )}
-            {activeTab === "templates" && (
-              <TemplatesTab
-                template={card.template}
-                onTemplateChange={onTemplateChange}
-              />
-            )}
-            {activeTab === "colors" && (
-              <ColorsTab
-                cardColor={card.cardColor}
-                onColorChange={onColorChange}
-              />
-            )}
-            {activeTab === "filters" && (
-              <FiltersTab
-                filter={card.filter}
-                textRun={card.textRun}
-                blurAmount={card.blurAmount}
-                onFilterChange={onFilterChange}
-                onTextRunToggle={onTextRunToggle}
-                onBlurChange={onBlurChange}
-              />
-            )}
+            <ColorsTab
+              cardColor={card.cardColor}
+              onColorChange={onColorChange}
+            />
           </motion.div>
-        </AnimatePresence>
-      </div>
+        )}
+      </AnimatePresence>
+
+      {/* ── All other tab panels — inside clipping panel-scroll context ── */}
+      {activeTab !== "colors" && (
+        <div className="flex-1 relative overflow-hidden">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={activeTab}
+              variants={tabVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={{ duration: 0.18, ease: "easeInOut" }}
+              className="absolute inset-0 panel-scroll px-space-4 py-space-4"
+            >
+              {activeTab === "upload" && (
+                <UploadTab
+                  photoUrl={card.photoUrl}
+                  onPhotoChange={onPhotoChange}
+                />
+              )}
+              {activeTab === "templates" && (
+                <TemplatesTab
+                  template={card.template}
+                  onTemplateChange={onTemplateChange}
+                />
+              )}
+              {activeTab === "filters" && (
+                <FiltersTab
+                  filter={card.filter}
+                  textRun={card.textRun}
+                  blurAmount={card.blurAmount}
+                  onFilterChange={onFilterChange}
+                  onTextRunToggle={onTextRunToggle}
+                  onBlurChange={onBlurChange}
+                />
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      )}
 
 
     </motion.div>

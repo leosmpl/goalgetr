@@ -17,37 +17,13 @@ export default function ColorsTab({ cardColor, onColorChange }: ColorsTabProps) 
   );
 
   return (
-    <div className="flex flex-col gap-[var(--space-3)]">
+    <div className="flex flex-col h-full">
 
-      {/* ── Section label ── */}
-      <p className="text-size-xs text-text-secondary">Colors</p>
-
-      {/* ── Horizontal scroll row ── */}
-      <div
-        className="flex gap-[var(--space-1)] w-full"
-        style={{
-          overflowX: "auto",
-          WebkitOverflowScrolling: "touch",
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-        } as React.CSSProperties}
-      >
-        {CARD_COLOR_PRESETS.map((preset) => (
-          <ColorSwatch
-            key={preset.value}
-            color={preset.value}
-            label={preset.label}
-            selected={preset.value.toLowerCase() === cardColor.toLowerCase()}
-            onClick={() => onColorChange(preset.value)}
-          />
-        ))}
-      </div>
-
-      {/* ── Custom colour picker ── */}
-      <div className="flex items-center justify-between pt-[var(--space-1)]">
-        <span className="text-size-xs text-text-tertiary">
+      {/* ── Section label + custom picker (padded) ── */}
+      <div className="flex items-center justify-between px-[var(--space-4)] pt-[var(--space-4)] pb-[var(--space-3)]">
+        <p className="text-size-xs text-text-secondary">
           {selectedPreset ? selectedPreset.label : "Custom"}
-        </span>
+        </p>
 
         <button
           onClick={() => customPickerRef.current?.click()}
@@ -68,6 +44,35 @@ export default function ColorsTab({ cardColor, onColorChange }: ColorsTabProps) 
           onChange={(e) => onColorChange(e.target.value)}
           aria-label="Custom card color"
         />
+      </div>
+
+      {/* ── Horizontal scroll row — full-bleed, no clipping parent ── */}
+      <div
+        className="swatch-scroll"
+        style={{
+          display: "flex",
+          gap: "var(--space-1)",
+          overflowX: "scroll",
+          overflowY: "hidden",
+          WebkitOverflowScrolling: "touch",
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+          touchAction: "pan-x",
+          paddingLeft: "var(--space-4)",
+          paddingRight: "var(--space-4)",
+          paddingBottom: "var(--space-4)",
+          flexShrink: 0,
+        } as React.CSSProperties}
+      >
+        {CARD_COLOR_PRESETS.map((preset) => (
+          <ColorSwatch
+            key={preset.value}
+            color={preset.value}
+            label={preset.label}
+            selected={preset.value.toLowerCase() === cardColor.toLowerCase()}
+            onClick={() => onColorChange(preset.value)}
+          />
+        ))}
       </div>
 
     </div>
