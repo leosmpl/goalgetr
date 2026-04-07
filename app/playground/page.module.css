@@ -1,0 +1,78 @@
+.indexShell {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.indexHeader h1 {
+  font-size: var(--text-4xl);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: var(--lh-4xl);
+  margin-bottom: var(--space-2);
+}
+.indexHeader p {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: var(--lh-base);
+}
+
+.indexSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.indexSectionTitle {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.indexGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-4);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.indexCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-5);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-6);
+  text-decoration: none;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+.indexCard:hover {
+  border-color: var(--border-secondary);
+  background: var(--bg-tertiary);
+}
+.indexCard strong {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.indexCard span {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--lh-sm);
+}
+
+.indexCardSystem {
+  border-color: var(--bg-brand-primary);
+}
+.indexCardSystem:hover {
+  background: rgba(44, 127, 255, 0.08);
+}

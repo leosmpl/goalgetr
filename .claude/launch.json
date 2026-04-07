@@ -1,0 +1,16 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "goalgetr-dev",
+      "runtimeExecutable": "/Users/leo/.local/share/fnm/node-versions/v22.22.0/installation/bin/node",
+      "runtimeArgs": [
+        "/Users/leo/Desktop/Goalgetr/node_modules/.bin/next",
+        "dev"
+      ],
+      "port": 3000,
+      "autoPort": true,
+      "cwd": "/Users/leo/Desktop/Goalgetr"
+    }
+  ]
+}

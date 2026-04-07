@@ -1,0 +1,197 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────────
+   Design Token CSS Custom Properties
+   Source: /Tokens/*.json (design-tokens skill)
+   Used by: Tailwind config (theme.extend) + playground CSS modules
+   Rule: no hardcoded values — every value traces to a token file
+───────────────────────────────────────────────────────────── */
+:root {
+  /* ── Backgrounds — Tokens/1.Color Modes.json ── */
+  --bg-primary:           #0C0A09;   /* Neutral/950 */
+  --bg-secondary:         #1B1917;   /* Neutral/900 */
+  --bg-tertiary:          #282524;   /* Neutral/800 */
+  --bg-quaternary:        #44403C;   /* Neutral/700 */
+  --bg-inverse:           #FFFFFF;   /* Common/White */
+  --bg-brand-primary:     #2C7FFF;   /* Blue/500 */
+  --bg-brand-secondary:   #BFDBFF;   /* Blue/200 */
+  --bg-error-primary:     #FD603D;   /* Red/500 */
+  --bg-error-secondary:   #FFB690;   /* Red/200 */
+  --bg-success-primary:   #21A77C;   /* Teal/500 */
+  --bg-success-secondary: #8FEFC8;   /* Teal/200 */
+
+  /* ── Foregrounds — Tokens/1.Color Modes.json ── */
+  --fg-primary:           #FAFAF9;   /* Neutral/50 */
+  --fg-secondary:         #F5F5F4;   /* Neutral/100 */
+  --fg-tertiary:          #E7E5E4;   /* Neutral/200 */
+  --fg-quaternary:        #D6D3D1;   /* Neutral/300 */
+  --fg-inverse:           #0C0A09;   /* Neutral/950 */
+  --fg-brand:             #DBEAFE;   /* Blue/100 */
+  --fg-brand-secondary:   #2C7FFF;   /* Blue/500 */
+  --fg-error-primary:     #FFD1AD;   /* Red/100 */
+  --fg-error-secondary:   #FD603D;   /* Red/500 */
+  --fg-success-primary:   #B0FFE0;   /* Teal/100 */
+  --fg-success-secondary: #21A77C;   /* Teal/500 */
+
+  /* ── Text — Tokens/1.Color Modes.json ── */
+  --text-primary:         #F5F5F4;   /* Neutral/100 */
+  --text-secondary:       #D6D3D1;   /* Neutral/300 */
+  --text-tertiary:        #A5A09C;   /* Neutral/400 */
+  --text-inverse:         #0C0A09;   /* Neutral/950 */
+  --text-brand:           #2C7FFF;   /* Blue/500 */
+  --text-error:           #FD603D;   /* Red/500 */
+  --text-success:         #21A77C;   /* Teal/500 */
+
+  /* ── Borders — Tokens/1.Color Modes.json ── */
+  --border-primary:       #282524;   /* Neutral/800 */
+  --border-secondary:     #57534E;   /* Neutral/600 */
+  --border-tertiary:      #A5A09C;   /* Neutral/400 */
+  --border-white:         #FFFFFF;   /* Common/White */
+
+  /* ── Primitive Yellow scale — Tokens/_Primitive colors.json ── */
+  --yellow-300:           #FFDD87;   /* Yellow/300 */
+  --yellow-400:           #FFCF69;   /* Yellow/400 */
+  --yellow-500:           #FFB938;   /* Yellow/500 — card accent */
+  --yellow-600:           #DB9628;   /* Yellow/600 */
+  --yellow-700:           #B7751C;   /* Yellow/700 */
+
+  /* ── Border Radius — Tokens/2.Radius.json ── */
+  --radius-0:             0px;
+  --radius-1:             2px;
+  --radius-2:             4px;
+  --radius-3:             6px;
+  --radius-4:             8px;
+  --radius-5:             12px;
+  --radius-6:             16px;
+  --radius-7:             20px;
+  --radius-8:             24px;
+  --radius-9:             32px;
+  --radius-11:            48px;
+  --radius-full:          9999px;
+
+  /* ── Spacing — Tokens/3.Spacing.json ── */
+  --space-0:   0px;
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-7:   28px;
+  --space-8:   32px;
+  --space-9:   36px;
+  --space-10:  40px;
+  --space-11:  44px;
+  --space-12:  48px;
+  --space-14:  56px;
+  --space-16:  64px;
+  --space-20:  80px;
+  --space-24:  96px;
+  --space-32:  128px;
+
+  /* ── Typography — Tokens/4.Typography.json ── */
+  --font-sans:    "Geist", system-ui, sans-serif;
+  --font-mono:    ui-monospace, "Geist Mono", monospace;
+
+  --text-xs:    12px;  --lh-xs:    16px;
+  --text-sm:    14px;  --lh-sm:    20px;
+  --text-base:  16px;  --lh-base:  24px;
+  --text-lg:    18px;  --lh-lg:    28px;
+  --text-xl:    20px;  --lh-xl:    28px;
+  --text-2xl:   24px;  --lh-2xl:   32px;
+  --text-3xl:   30px;  --lh-3xl:   36px;
+  --text-4xl:   36px;  --lh-4xl:   40px;
+  --text-5xl:   48px;  --lh-5xl:   48px;
+  --text-6xl:   60px;  --lh-6xl:   60px;
+  --text-7xl:   72px;  --lh-7xl:   72px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Base reset — mobile-first, full-screen, no bounce scroll
+   All colour values via Tailwind token utilities (no raw hex)
+───────────────────────────────────────────────────────────── */
+html,
+body {
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scoped to card-editor — playground pages need normal scroll */
+.editor-layout {
+  overflow: hidden;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Card 3-D flip primitives
+   Uses CSS custom property so the perspective value is
+   centralised here and never hardcoded in component files.
+───────────────────────────────────────────────────────────── */
+.card-scene {
+  perspective: 1000px;
+}
+
+.card-inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.card-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-face--back {
+  transform: rotateY(180deg);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Hex badge clip-path
+───────────────────────────────────────────────────────────── */
+.hex-clip {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Scrollable panel (hide scrollbar cross-browser)
+───────────────────────────────────────────────────────────── */
+.panel-scroll {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.panel-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Range input accent — maps to bg-brand-primary token value
+   (inline accent-color cannot reference CSS vars in all browsers)
+───────────────────────────────────────────────────────────── */
+input[type="range"] {
+  accent-color: #2C7FFF; /* = token bg-brand-primary / Blue/500 */
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Respect reduced-motion preference
+───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .card-inner {
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
