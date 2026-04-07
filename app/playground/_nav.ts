@@ -46,6 +46,11 @@ export const COMPONENT_NAV: NavItem[] = [
     href: "/playground/button-primary",
     description: "Primary CTA — 3 sizes, enabled / hover / disabled states, optional icons",
   },
+  {
+    name: "Icon Button",
+    href: "/playground/icon-button",
+    description: "Plain icon-only button — 3 sizes, transparent / hover / disabled",
+  },
 ];
 
 export const NAV_ITEMS: NavItem[] = [...SYSTEM_NAV, ...COMPONENT_NAV];
