@@ -13,7 +13,7 @@ import UploadTab    from "./tabs/UploadTab";
 import TemplatesTab from "./tabs/TemplatesTab";
 import FiltersTab   from "./tabs/FiltersTab";
 import { TabBar, TabButton } from "./TabBar";
-import ButtonPrimary from "@/components/ui/ButtonPrimary";
+
 
 // ─── Tab icons (sourced from Figma node 17786:9512) ───────────────────────
 
@@ -110,8 +110,6 @@ interface EditorSheetProps {
   onFilterChange:   (f: CardFilter) => void;
   onTextRunToggle:  () => void;
   onBlurChange:     (v: number) => void;
-  onSave:           () => void;
-  isDirty:          boolean;
 }
 
 export default function EditorSheet({
@@ -124,8 +122,6 @@ export default function EditorSheet({
   onFilterChange,
   onTextRunToggle,
   onBlurChange,
-  onSave,
-  isDirty,
 }: EditorSheetProps) {
   return (
     <motion.div
@@ -194,16 +190,7 @@ export default function EditorSheet({
         </AnimatePresence>
       </div>
 
-      {/* ── Save button ── */}
-      <div className="flex-shrink-0 px-space-4 pb-space-4 pt-space-2">
-        <ButtonPrimary
-          label={isDirty ? "Save" : "No changes"}
-          size="md"
-          fullWidth
-          disabled={!isDirty}
-          onClick={onSave}
-        />
-      </div>
+
     </motion.div>
   );
 }

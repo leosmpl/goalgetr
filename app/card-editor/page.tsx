@@ -13,7 +13,6 @@ export default function CardEditorPage() {
     card,
     isFlipped,
     activeTab,
-    isDirty,
     flipCard,
     setTab,
     setCardColor,
@@ -22,7 +21,6 @@ export default function CardEditorPage() {
     setFilter,
     toggleTextRun,
     setBlur,
-    save,
     overallRating,
   } = usePlayerCard();
 
@@ -91,8 +89,6 @@ export default function CardEditorPage() {
             onFilterChange={setFilter}
             onTextRunToggle={toggleTextRun}
             onBlurChange={setBlur}
-            onSave={save}
-            isDirty={isDirty}
           />
         </div>
       </div>

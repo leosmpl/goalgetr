@@ -24,8 +24,13 @@ export default function ColorsTab({ cardColor, onColorChange }: ColorsTabProps) 
 
       {/* ── Horizontal scroll row ── */}
       <div
-        className="flex gap-[var(--space-1)] overflow-x-auto"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
+        className="flex gap-[var(--space-1)] w-full"
+        style={{
+          overflowX: "auto",
+          WebkitOverflowScrolling: "touch",
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+        } as React.CSSProperties}
       >
         {CARD_COLOR_PRESETS.map((preset) => (
           <ColorSwatch

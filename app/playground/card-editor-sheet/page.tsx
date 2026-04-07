@@ -137,8 +137,6 @@ export default function CardEditorSheetPage() {
                   onFilterChange={(f: CardFilter) => patch({ filter: f })}
                   onTextRunToggle={() => patch({ textRun: !card.textRun })}
                   onBlurChange={(v) => patch({ blurAmount: v })}
-                  onSave={handleSave}
-                  isDirty={isDirty}
                 />
               </div>
 
