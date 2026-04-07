@@ -49,7 +49,7 @@ export default function CardEditorPage() {
         </div>
 
         {/* App content — padded under safe areas */}
-        <div className="flex flex-col h-full" style={{ paddingTop: "62px", paddingBottom: "34px" }}>
+        <div className="flex flex-col h-full" style={{ paddingTop: "62px" }}>
           <EditorHeader />
 
           {/* Card preview */}
