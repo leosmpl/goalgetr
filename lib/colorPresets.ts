@@ -1,21 +1,29 @@
 /**
- * Card background colour presets.
- * Every hex value is sourced directly from Tokens/_Primitive colors.json.
- * No invented values — see token source column.
+ * Card background colour presets — full spectrum palette.
+ * 17 colours covering the complete hue wheel.
+ * Values match the colour selector screenshot (Figma node 17794-1927).
  */
 export interface ColorPreset {
   label: string;
-  value: string;       // hex from token file
-  tokenSource: string; // token reference for traceability
+  value: string; // hex
 }
 
 export const CARD_COLOR_PRESETS: ColorPreset[] = [
-  { label: "Ember",   value: "#FFB938", tokenSource: "Yellow/500" },
-  { label: "Sunrise", value: "#FFCF69", tokenSource: "Yellow/400" },
-  { label: "Gold",    value: "#DB9628", tokenSource: "Yellow/600" },
-  { label: "Ocean",   value: "#2C7FFF", tokenSource: "Blue/500 = bg-brand-primary" },
-  { label: "Teal",    value: "#21A77C", tokenSource: "Teal/500 = bg-success-primary" },
-  { label: "Flame",   value: "#FD603D", tokenSource: "Red/500 = bg-error-primary" },
-  { label: "Ash",     value: "#44403C", tokenSource: "Neutral/700 = bg-quaternary" },
-  { label: "Ice",     value: "#E7E5E4", tokenSource: "Neutral/200 = fg-tertiary" },
+  { label: "Red",     value: "#EF4444" },
+  { label: "Orange",  value: "#F97316" },
+  { label: "Amber",   value: "#F59E0B" },
+  { label: "Yellow",  value: "#FACC15" },
+  { label: "Lime",    value: "#A3E635" },
+  { label: "Green",   value: "#22C55E" },
+  { label: "Emerald", value: "#10B981" },
+  { label: "Teal",    value: "#14B8A6" },
+  { label: "Cyan",    value: "#06B6D4" },
+  { label: "Sky",     value: "#38BDF8" },
+  { label: "Blue",    value: "#3B82F6" },
+  { label: "Indigo",  value: "#6366F1" },
+  { label: "Violet",  value: "#8B5CF6" },
+  { label: "Purple",  value: "#A855F7" },
+  { label: "Fuchsia", value: "#D946EF" },
+  { label: "Pink",    value: "#EC4899" },
+  { label: "Rose",    value: "#F43F5E" },
 ];
