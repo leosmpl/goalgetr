@@ -44,7 +44,7 @@ export default function ColorSwatch({
       aria-pressed={selected}
       className={`
         relative flex flex-col items-stretch overflow-hidden
-        w-full aspect-square
+        w-[108px] h-[108px] shrink-0
         rounded-[var(--radius-5)]
         border transition-colors duration-150
         focus-visible:outline-none focus-visible:ring-2

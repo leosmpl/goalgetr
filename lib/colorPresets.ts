@@ -1,7 +1,6 @@
 /**
  * Card background colour presets — full spectrum palette.
- * 17 colours covering the complete hue wheel.
- * Values match the colour selector screenshot (Figma node 17794-1927).
+ * Hex values sourced directly from Figma node 17794-1959.
  */
 export interface ColorPreset {
   label: string;
@@ -9,21 +8,21 @@ export interface ColorPreset {
 }
 
 export const CARD_COLOR_PRESETS: ColorPreset[] = [
-  { label: "Red",     value: "#EF4444" },
-  { label: "Orange",  value: "#F97316" },
-  { label: "Amber",   value: "#F59E0B" },
-  { label: "Yellow",  value: "#FACC15" },
-  { label: "Lime",    value: "#A3E635" },
-  { label: "Green",   value: "#22C55E" },
-  { label: "Emerald", value: "#10B981" },
-  { label: "Teal",    value: "#14B8A6" },
-  { label: "Cyan",    value: "#06B6D4" },
-  { label: "Sky",     value: "#38BDF8" },
-  { label: "Blue",    value: "#3B82F6" },
-  { label: "Indigo",  value: "#6366F1" },
-  { label: "Violet",  value: "#8B5CF6" },
-  { label: "Purple",  value: "#A855F7" },
-  { label: "Fuchsia", value: "#D946EF" },
-  { label: "Pink",    value: "#EC4899" },
-  { label: "Rose",    value: "#F43F5E" },
+  { label: "Red",     value: "#FF6467" },
+  { label: "Orange",  value: "#FF8904" },
+  { label: "Amber",   value: "#FFB900" },
+  { label: "Yellow",  value: "#FDC700" },
+  { label: "Lime",    value: "#9AE600" },
+  { label: "Green",   value: "#05DF72" },
+  { label: "Emerald", value: "#00D492" },
+  { label: "Teal",    value: "#00D5BE" },
+  { label: "Cyan",    value: "#00D3F2" },
+  { label: "Sky",     value: "#00BCFF" },
+  { label: "Blue",    value: "#51A2FF" },
+  { label: "Indigo",  value: "#7C86FF" },
+  { label: "Violet",  value: "#A684FF" },
+  { label: "Purple",  value: "#C27AFF" },
+  { label: "Fuchsia", value: "#ED6AFF" },
+  { label: "Pink",    value: "#FB64B6" },
+  { label: "Rose",    value: "#FF637E" },
 ];

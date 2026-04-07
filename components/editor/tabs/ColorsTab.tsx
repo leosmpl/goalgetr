@@ -17,15 +17,16 @@ export default function ColorsTab({ cardColor, onColorChange }: ColorsTabProps) 
   );
 
   return (
-    <div className="flex flex-col gap-space-4">
+    <div className="flex flex-col gap-[var(--space-3)]">
 
       {/* ── Section label ── */}
-      <p className="text-size-xs font-semibold uppercase tracking-wider text-text-tertiary">
-        Card Background
-      </p>
+      <p className="text-size-xs text-text-secondary">Colors</p>
 
-      {/* ── Colour grid — 3 columns, ColorSwatch cards ── */}
-      <div className="grid grid-cols-3 gap-[var(--space-3)]">
+      {/* ── Horizontal scroll row ── */}
+      <div
+        className="flex gap-[var(--space-1)] overflow-x-auto"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
+      >
         {CARD_COLOR_PRESETS.map((preset) => (
           <ColorSwatch
             key={preset.value}
@@ -38,14 +39,14 @@ export default function ColorsTab({ cardColor, onColorChange }: ColorsTabProps) 
       </div>
 
       {/* ── Custom colour picker ── */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between pt-[var(--space-1)]">
         <span className="text-size-xs text-text-tertiary">
           {selectedPreset ? selectedPreset.label : "Custom"}
         </span>
 
         <button
           onClick={() => customPickerRef.current?.click()}
-          className="flex items-center gap-space-2 px-space-4 py-space-2 rounded-radius-full bg-bg-tertiary text-size-sm text-text-secondary font-medium hover:bg-bg-quaternary transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bg-brand-primary"
+          className="flex items-center gap-[var(--space-2)] px-[var(--space-4)] py-[var(--space-2)] rounded-[var(--radius-full)] bg-bg-tertiary text-size-sm text-text-secondary font-medium hover:bg-bg-quaternary transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bg-brand-primary"
         >
           <span
             className="w-4 h-4 rounded-full border border-border-secondary flex-shrink-0"
