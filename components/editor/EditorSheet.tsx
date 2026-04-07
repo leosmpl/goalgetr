@@ -127,17 +127,12 @@ export default function EditorSheet({
 }: EditorSheetProps) {
   return (
     <motion.div
-      className="flex flex-col bg-bg-secondary rounded-t-[var(--radius-10)] overflow-hidden"
+      className="flex flex-col bg-bg-secondary rounded-t-[var(--radius-9)] overflow-hidden"
       style={{ height: "380px" }}
       initial={{ y: "100%" }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 35 }}
     >
-      {/* Drag indicator */}
-      <div className="flex justify-center pt-space-2 pb-space-1 flex-shrink-0">
-        <div className="w-10 h-1 rounded-radius-full bg-bg-quaternary" />
-      </div>
-
       {/* ── Tab navigation (Figma: border-b row, brand-primary underline) ── */}
       <nav
         className="flex flex-shrink-0 border-b border-border-primary"
