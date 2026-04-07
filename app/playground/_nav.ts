@@ -36,6 +36,11 @@ export const COMPONENT_NAV: NavItem[] = [
     href: "/playground/card-editor-sheet",
     description: "4-tab interactive editor panel: Upload, Templates, Colors, Filters",
   },
+  {
+    name: "Tab Bar",
+    href: "/playground/tab-bar",
+    description: "Reusable TabBar + TabButton with animated active underline",
+  },
 ];
 
 export const NAV_ITEMS: NavItem[] = [...SYSTEM_NAV, ...COMPONENT_NAV];
