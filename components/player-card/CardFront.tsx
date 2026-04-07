@@ -7,10 +7,14 @@ interface CardFrontProps {
 
 // CSS filter strings for each preset
 const FILTER_MAP: Record<CardFilter, string> = {
-  none:     "none",
-  noir:     "grayscale(1)",
-  heritage: "sepia(0.8) contrast(1.1)",
-  gameday:  "contrast(1.4) saturate(1.3) brightness(1.05)",
+  none:      "none",
+  vivid:     "contrast(1.4) saturate(1.4) brightness(1.05)",
+  noir:      "grayscale(1)",
+  golden:    "sepia(0.35) saturate(1.9) brightness(1.1) contrast(1.05)",
+  chrome:    "contrast(1.25) saturate(1.5) brightness(1.08) hue-rotate(8deg)",
+  faded:     "brightness(1.2) saturate(0.4) contrast(0.85)",
+  matte:     "saturate(0.7) contrast(1.12) brightness(1.02)",
+  cinematic: "contrast(1.45) saturate(0.9) brightness(0.92)",
 };
 
 // Silhouette SVG shown when no photo is uploaded

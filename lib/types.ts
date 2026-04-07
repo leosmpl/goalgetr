@@ -7,7 +7,7 @@ export type StatKey = "SKA" | "SHO" | "PUC" | "GAM" | "FIT" | "CHA";
 export type CardTemplate = "classic" | "modern" | "stats";
 
 /** CSS filter preset applied to the photo area */
-export type CardFilter = "none" | "noir" | "heritage" | "gameday";
+export type CardFilter = "none" | "vivid" | "noir" | "golden" | "chrome" | "faded" | "matte" | "cinematic";
 
 export interface PlayerStats {
   SKA: number;
@@ -32,7 +32,7 @@ export interface PlayerCardData {
   badges: BadgeType[];
   /** Layout template — classic / modern / stats */
   template: CardTemplate;
-  /** CSS filter preset — none / noir / heritage / gameday */
+  /** CSS filter preset — none / vivid / noir / golden / chrome / faded / matte / cinematic */
   filter: CardFilter;
   /** When true, player first name scrolls as a marquee */
   textRun: boolean;

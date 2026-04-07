@@ -13,10 +13,14 @@ interface FiltersTabProps {
 }
 
 const FILTERS: { id: CardFilter; label: string }[] = [
-  { id: "none",     label: "Off" },
-  { id: "noir",     label: "Noir" },
-  { id: "heritage", label: "Heritage" },
-  { id: "gameday",  label: "Game Day" },
+  { id: "none",      label: "Off"       },
+  { id: "vivid",     label: "Vivid"     },
+  { id: "noir",      label: "Noir"      },
+  { id: "golden",    label: "Golden"    },
+  { id: "chrome",    label: "Chrome"    },
+  { id: "faded",     label: "Faded"     },
+  { id: "matte",     label: "Matte"     },
+  { id: "cinematic", label: "Cinematic" },
 ];
 
 export default function FiltersTab({

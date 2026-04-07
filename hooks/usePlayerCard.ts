@@ -26,7 +26,7 @@ const DEFAULT_CARD: PlayerCardData = {
   stats: { SKA: 82, SHO: 79, PUC: 85, GAM: 88, FIT: 74, CHA: 91 },
   badges: ["Captain", "Dangler"],
   template: "classic",
-  filter: "none",
+  filter: "vivid",
   textRun: false,
   blurAmount: 0,
 };
