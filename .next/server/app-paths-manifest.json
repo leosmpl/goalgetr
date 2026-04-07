@@ -1,6 +1,0 @@
-{
-  "/page": "app/page.js",
-  "/card-editor/page": "app/card-editor/page.js",
-  "/playground/page": "app/playground/page.js",
-  "/playground/player-card/page": "app/playground/player-card/page.js"
-}
