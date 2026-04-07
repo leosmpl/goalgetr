@@ -4,7 +4,7 @@ import { useState } from "react";
 import { COMPONENT_NAV, SYSTEM_NAV } from "../_nav";
 import styles from "../player-card/page.module.css";
 import IconButton from "@/components/ui/IconButton";
-import type { IconButtonSize } from "@/components/ui/IconButton";
+import type { IconButtonVariant, IconButtonSize } from "@/components/ui/IconButton";
 
 const NAV_ITEMS = [...SYSTEM_NAV, ...COMPONENT_NAV];
 
@@ -18,58 +18,38 @@ const TOC_ITEMS = [
 ];
 
 const TOKEN_ROWS = [
-  { token: "rgba(255,255,255,0.10)", hex: "white / 10%", usage: "Hover background"                      },
-  { token: "--radius-9",            hex: "32px",         usage: "Button corner radius (pill)"            },
-  { token: "--space-1",             hex: "4px",          usage: "Padding around the icon"                },
-  { token: "--text-primary",        hex: "#F5F5F4",      usage: "Icon color (default + hover)"           },
-  { token: "opacity: 0.40",         hex: "—",            usage: "Disabled state opacity"                 },
+  { token: "--bg-brand-primary",        hex: "#2C7FFF",              usage: "primary variant background"              },
+  { token: "rgba(255,255,255,0.05)",    hex: "white / 5%",           usage: "soft variant background"                 },
+  { token: "rgba(255,255,255,0.10)",    hex: "white / 10%",          usage: "hover overlay — all variants"            },
+  { token: "--border-secondary",        hex: "#57534E",              usage: "outline variant border"                  },
+  { token: "--radius-9",               hex: "32px",                 usage: "pill corner radius — all variants"       },
+  { token: "--space-1",                hex: "4px",                  usage: "padding around icon — all sizes"         },
+  { token: "--text-primary",           hex: "#F5F5F4",              usage: "icon color — all variants enabled"       },
+  { token: "opacity: 0.40",            hex: "—",                    usage: "disabled state — all variants"           },
 ];
+
+const VARIANTS: IconButtonVariant[] = ["plain", "soft", "primary", "outline"];
+const SIZES: IconButtonSize[]       = ["sm", "md", "lg"];
 
 // ─── Demo icons ───────────────────────────────────────────────────────────────
-function XIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
-      <path d="M18 6 6 18M6 6l12 12"/>
-    </svg>
-  );
-}
-function HeartIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-    </svg>
-  );
-}
-function ShareIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
-      <path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/>
-    </svg>
-  );
-}
-function MoreIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <circle cx="12" cy="5"  r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/>
-    </svg>
-  );
-}
+function StarIcon()  { return <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>; }
+function XIcon()     { return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>; }
+function HeartIcon() { return <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>; }
+function MoreIcon()  { return <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>; }
 
-const ICONS = [
-  { id: "x",     label: "Close",  el: <XIcon />     },
-  { id: "heart", label: "Like",   el: <HeartIcon />  },
-  { id: "share", label: "Share",  el: <ShareIcon />  },
-  { id: "more",  label: "More",   el: <MoreIcon />   },
-];
+const VARIANT_DESC: Record<IconButtonVariant, string> = {
+  plain:   "Transparent bg · white/10 on hover",
+  soft:    "white/5 bg · white/10 on hover",
+  primary: "Brand-primary bg · white/10 overlay on hover",
+  outline: "Transparent + border-secondary · white/10 on hover",
+};
 
-const SIZES: IconButtonSize[] = ["sm", "md", "lg"];
-
-function buildSnippet(size: IconButtonSize, disabled: boolean): string {
+function buildSnippet(variant: IconButtonVariant, size: IconButtonSize, disabled: boolean): string {
   const attrs = [
-    `size="${size}"`,
+    variant !== "plain" ? `variant="${variant}"` : null,
+    size    !== "md"    ? `size="${size}"`        : null,
     `aria-label="Action"`,
-    disabled ? "disabled" : null,
+    disabled            ? "disabled"              : null,
     `onClick={() => console.log("clicked")}`,
   ].filter(Boolean).join("\n  ");
   return `<IconButton\n  ${attrs}\n>\n  <YourIcon />\n</IconButton>`;
@@ -77,12 +57,13 @@ function buildSnippet(size: IconButtonSize, disabled: boolean): string {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function IconButtonPlayground() {
+  const [variant,  setVariant]  = useState<IconButtonVariant>("plain");
   const [size,     setSize]     = useState<IconButtonSize>("md");
   const [disabled, setDisabled] = useState(false);
   const [copied,   setCopied]   = useState(false);
 
   function copy() {
-    navigator.clipboard.writeText(buildSnippet(size, disabled));
+    navigator.clipboard.writeText(buildSnippet(variant, size, disabled));
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   }
@@ -114,10 +95,10 @@ export default function IconButtonPlayground() {
         <header id="overview" className={styles.header}>
           <h1 className={styles.componentName}>Icon Button</h1>
           <p className={styles.componentDesc}>
-            Plain icon-only button from Figma node 17784-3201 — <em>IconButtons/Plain</em>.
-            Three sizes (Sm · Md · Lg), three states (default · hover · disabled).
-            No background by default; a <code>rgba(255,255,255,0.10)</code> fill
-            appears on hover. Requires an <code>aria-label</code> for accessibility.
+            Single unified icon-only button from Figma node 17799-7455. One component,
+            one <code>variant</code> prop — <strong>plain</strong> · <strong>soft</strong> · <strong>primary</strong> · <strong>outline</strong>.
+            Three sizes (Sm · Md · Lg), three states (enabled · hover · disabled).
+            Requires an <code>aria-label</code>.
           </p>
           <code className={styles.sourceBadge}>components/ui/IconButton.tsx</code>
         </header>
@@ -128,44 +109,47 @@ export default function IconButtonPlayground() {
           <div className={styles.previewCard}>
             <div className={styles.previewBar}>
               <span style={{ fontSize: "var(--text-xs)", color: "var(--text-tertiary)" }}>
-                size: <strong style={{ color: "var(--text-primary)" }}>{size}</strong>
+                variant: <strong style={{ color: "var(--text-primary)" }}>{variant}</strong>
+                {" · "}size: <strong style={{ color: "var(--text-primary)" }}>{size}</strong>
                 {" · "}disabled: <strong style={{ color: "var(--text-primary)" }}>{String(disabled)}</strong>
               </span>
-              <button className={styles.themeBtn} onClick={() => { setSize("md"); setDisabled(false); }}>
+              <button className={styles.themeBtn} onClick={() => { setVariant("plain"); setSize("md"); setDisabled(false); }}>
                 Reset
               </button>
             </div>
 
             <div className={styles.previewCanvas} style={{ flexDirection: "column", gap: "var(--space-8)", alignItems: "stretch" }}>
 
-              {/* All sizes × icons matrix */}
-              {SIZES.map((s) => (
-                <div key={s}>
-                  <p style={{ fontSize: "var(--text-xs)", color: "var(--text-tertiary)", marginBottom: "var(--space-3)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
-                    {s} — {s === "sm" ? "32px" : s === "md" ? "40px" : "48px"}
-                  </p>
-                  <div style={{ display: "flex", gap: "var(--space-3)", alignItems: "center", flexWrap: "wrap" }}>
-                    {ICONS.map((icon) => (
-                      <IconButton key={icon.id} size={s} aria-label={icon.label}>
-                        {icon.el}
-                      </IconButton>
+              {/* Full variant × size matrix */}
+              {VARIANTS.map((v) => (
+                <div key={v}>
+                  <p style={{ fontSize: "var(--text-xs)", color: "var(--text-tertiary)", marginBottom: "var(--space-1)", textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 600 }}>{v}</p>
+                  <p style={{ fontSize: "var(--text-xs)", color: "var(--text-tertiary)", marginBottom: "var(--space-3)" }}>{VARIANT_DESC[v]}</p>
+                  <div style={{ display: "flex", gap: "var(--space-6)", alignItems: "center", flexWrap: "wrap" }}>
+                    {SIZES.map((s) => (
+                      <div key={s} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--space-2)" }}>
+                        <div style={{ display: "flex", gap: "var(--space-2)", alignItems: "center" }}>
+                          {/* Enabled */}
+                          <IconButton variant={v} size={s} aria-label={`${v} ${s} enabled`}><StarIcon /></IconButton>
+                          {/* Hover (forced via className) */}
+                          <IconButton variant={v} size={s} aria-label={`${v} ${s} hover`}
+                            className={v === "primary" ? "bg-bg-brand-primary [&>span:first-child]:opacity-10" : "bg-[rgba(255,255,255,0.10)]"}
+                          ><HeartIcon /></IconButton>
+                          {/* Disabled */}
+                          <IconButton variant={v} size={s} aria-label={`${v} ${s} disabled`} disabled><XIcon /></IconButton>
+                        </div>
+                        <span style={{ fontSize: "var(--text-xs)", color: "var(--text-tertiary)" }}>{s}</span>
+                      </div>
                     ))}
-                    <span style={{ fontSize: "var(--text-xs)", color: "var(--text-tertiary)", marginLeft: "var(--space-2)" }}>hover →</span>
-                    <IconButton size={s} aria-label="Hover example" className="bg-[rgba(255,255,255,0.10)]">
-                      <HeartIcon />
-                    </IconButton>
-                    <span style={{ fontSize: "var(--text-xs)", color: "var(--text-tertiary)", marginLeft: "var(--space-2)" }}>disabled →</span>
-                    <IconButton size={s} aria-label="Disabled example" disabled>
-                      <XIcon />
-                    </IconButton>
                   </div>
                 </div>
               ))}
 
-              {/* Knob-driven live button */}
+              {/* Interactive knob-driven */}
               <div>
-                <p style={{ fontSize: "var(--text-xs)", color: "var(--text-tertiary)", marginBottom: "var(--space-3)", textTransform: "uppercase", letterSpacing: "0.06em" }}>Interactive (knobs below)</p>
+                <p style={{ fontSize: "var(--text-xs)", color: "var(--text-tertiary)", marginBottom: "var(--space-3)", textTransform: "uppercase", letterSpacing: "0.06em" }}>Interactive (use knobs below)</p>
                 <IconButton
+                  variant={variant}
                   size={size}
                   disabled={disabled}
                   aria-label="Interactive example"
@@ -184,13 +168,9 @@ export default function IconButtonPlayground() {
           <div className={styles.codeBlock}>
             <div className={styles.codeHeader}>
               <span className={styles.codeFilename}>usage.tsx</span>
-              <button className={styles.copyBtn} onClick={copy}>
-                {copied ? "✓ Copied" : "Copy"}
-              </button>
+              <button className={styles.copyBtn} onClick={copy}>{copied ? "✓ Copied" : "Copy"}</button>
             </div>
-            <pre className={styles.pre}>
-              <code>{buildSnippet(size, disabled)}</code>
-            </pre>
+            <pre className={styles.pre}><code>{buildSnippet(variant, size, disabled)}</code></pre>
           </div>
           <p className={styles.importHint}>
             <code>{`import IconButton from "@/components/ui/IconButton";`}</code>
@@ -201,7 +181,15 @@ export default function IconButtonPlayground() {
         <section id="props" className={styles.section}>
           <h2 className={styles.sectionTitle}>Props / Knobs</h2>
           <div className={styles.knobsGrid}>
-
+            <div className={styles.knobRow}>
+              <label className={styles.knobLabel}>variant</label>
+              <select className={styles.knobSelect} value={variant} onChange={(e) => setVariant(e.target.value as IconButtonVariant)}>
+                <option value="plain">plain — transparent</option>
+                <option value="soft">soft — white/5 bg</option>
+                <option value="primary">primary — brand blue</option>
+                <option value="outline">outline — border</option>
+              </select>
+            </div>
             <div className={styles.knobRow}>
               <label className={styles.knobLabel}>size</label>
               <select className={styles.knobSelect} value={size} onChange={(e) => setSize(e.target.value as IconButtonSize)}>
@@ -210,18 +198,14 @@ export default function IconButtonPlayground() {
                 <option value="lg">lg — 48px</option>
               </select>
             </div>
-
             <div className={styles.knobRow}>
               <label className={styles.knobLabel}>disabled</label>
               <label className={styles.knobToggle}>
-                <span className={styles.knobTogglePill} data-on={disabled}>
-                  <span className={styles.knobToggleThumb} />
-                </span>
+                <span className={styles.knobTogglePill} data-on={disabled}><span className={styles.knobToggleThumb} /></span>
                 <span className={styles.knobToggleLabel}>{disabled ? "ON" : "OFF"}</span>
                 <input type="checkbox" hidden checked={disabled} onChange={(e) => setDisabled(e.target.checked)} />
               </label>
             </div>
-
           </div>
 
           {/* Prop table */}
@@ -229,20 +213,16 @@ export default function IconButtonPlayground() {
             <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
             <tbody>
               {[
-                ["children",    "ReactNode",                    "—",        "The icon to render inside the button"],
-                ["size",        '"sm" | "md" | "lg"',           '"md"',     "Controls button + icon area size"],
-                ["disabled",    "boolean",                      "false",    "Dims icon to 40% opacity, blocks interaction"],
-                ["aria-label",  "string",                       "required", "Accessible name — required for icon-only buttons"],
-                ["onClick",     "() => void",                   "—",        "Click handler"],
-                ["type",        '"button" | "submit" | "reset"','"button"', "Native HTML button type"],
-                ["className",   "string",                       '""',       "Extra classes forwarded to the root button"],
+                ["children",   "ReactNode",                                         "—",        "Icon to render inside the button"],
+                ["variant",    '"plain" | "soft" | "primary" | "outline"',          '"plain"',  "Visual style — controls bg, border, hover treatment"],
+                ["size",       '"sm" | "md" | "lg"',                                '"md"',     "sm=32px · md=40px · lg=48px"],
+                ["disabled",   "boolean",                                            "false",    "opacity-40, pointer-events blocked, native disabled"],
+                ["aria-label", "string",                                             "required", "Accessible name — required for icon-only buttons"],
+                ["onClick",    "() => void",                                         "—",        "Click handler"],
+                ["type",       '"button" | "submit" | "reset"',                      '"button"', "Native HTML button type"],
+                ["className",  "string",                                             '""',       "Extra classes forwarded to root button"],
               ].map(([prop, type, def, desc]) => (
-                <tr key={prop}>
-                  <td><code>{prop}</code></td>
-                  <td><code>{type}</code></td>
-                  <td><code>{def}</code></td>
-                  <td>{desc}</td>
-                </tr>
+                <tr key={prop}><td><code>{prop}</code></td><td><code>{type}</code></td><td><code>{def}</code></td><td>{desc}</td></tr>
               ))}
             </tbody>
           </table>
@@ -257,7 +237,14 @@ export default function IconButtonPlayground() {
               {TOKEN_ROWS.map((row) => (
                 <tr key={row.token}>
                   <td><code>{row.token}</code></td>
-                  <td><code>{row.hex}</code></td>
+                  <td>
+                    <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
+                      {row.hex.startsWith("#") && (
+                        <span style={{ display:"inline-block", width:14, height:14, borderRadius:3, background:row.hex, border:"1px solid var(--border-primary)", flexShrink:0 }} />
+                      )}
+                      <code>{row.hex}</code>
+                    </div>
+                  </td>
                   <td>{row.usage}</td>
                 </tr>
               ))}
@@ -271,23 +258,23 @@ export default function IconButtonPlayground() {
           <dl className={styles.a11yList}>
             <div className={styles.a11yItem}>
               <dt className={styles.a11yTerm}>aria-label required</dt>
-              <dd className={styles.a11yDesc}>Icon-only buttons have no visible text. The <code>aria-label</code> prop is TypeScript-required and forwarded directly to the <code>&lt;button&gt;</code> element — screen readers announce it as the button&apos;s name.</dd>
+              <dd className={styles.a11yDesc}>Icon-only buttons have no visible text. <code>aria-label</code> is TypeScript-required and forwarded to the native <code>&lt;button&gt;</code> element so screen readers announce a meaningful name.</dd>
             </div>
             <div className={styles.a11yItem}>
               <dt className={styles.a11yTerm}>Semantic element</dt>
-              <dd className={styles.a11yDesc}>Renders a native <code>&lt;button&gt;</code> — keyboard focusable by default, activated with Enter/Space, correctly announced without any ARIA hacks.</dd>
+              <dd className={styles.a11yDesc}>Renders a native <code>&lt;button&gt;</code> — keyboard focusable, activated with Enter/Space, no ARIA overrides needed.</dd>
             </div>
             <div className={styles.a11yItem}>
-              <dt className={styles.a11yTerm}>Disabled state</dt>
-              <dd className={styles.a11yDesc}>Uses the native <code>disabled</code> attribute so the button is removed from the tab order and announced as unavailable. Visual treatment: 40% opacity on the icon.</dd>
+              <dt className={styles.a11yTerm}>Disabled</dt>
+              <dd className={styles.a11yDesc}>Uses the native <code>disabled</code> attribute — removed from tab order, announced as unavailable, pointer events blocked. Visual: 40% opacity on the entire button.</dd>
             </div>
             <div className={styles.a11yItem}>
               <dt className={styles.a11yTerm}>Focus ring</dt>
-              <dd className={styles.a11yDesc}><code>focus-visible:ring-2 ring-inset</code> shows a 2px brand-blue ring only on keyboard navigation, not on mouse click.</dd>
+              <dd className={styles.a11yDesc}><code>focus-visible:ring-2 ring-inset</code> — 2px brand-blue ring appears only on keyboard navigation, not mouse click.</dd>
             </div>
             <div className={styles.a11yItem}>
               <dt className={styles.a11yTerm}>Hit area</dt>
-              <dd className={styles.a11yDesc}>Minimum tap target is 32×32px (Sm) — meets WCAG 2.5.5 Target Size (AAA recommends 44×44px; use <code>size="md"</code> or <code>"lg"</code> in touch contexts).</dd>
+              <dd className={styles.a11yDesc}>Minimum 32×32px (sm). Use <code>size="md"</code> (40px) or <code>"lg"</code> (48px) in touch interfaces to meet WCAG 2.5.5.</dd>
             </div>
             <div className={styles.a11yItem}>
               <dt className={styles.a11yTerm}>Reduced motion</dt>
