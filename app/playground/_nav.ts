@@ -51,6 +51,11 @@ export const COMPONENT_NAV: NavItem[] = [
     href: "/playground/icon-button",
     description: "Plain icon-only button — 3 sizes, transparent / hover / disabled",
   },
+  {
+    name: "Icons",
+    href: "/playground/icons",
+    description: "Custom icon set from Figma node 12939-5630 — Line & Solid variants",
+  },
 ];
 
 export const NAV_ITEMS: NavItem[] = [...SYSTEM_NAV, ...COMPONENT_NAV];
