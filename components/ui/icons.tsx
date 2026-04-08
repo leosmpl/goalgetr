@@ -78,6 +78,23 @@ export function IconCardsBlank({ solid, width = 16, height = 16, className }: Ic
   );
 }
 
+// ─── CircleHalfStroke ─────────────────────────────────────────────────────────
+// Solid: left half filled + circle outline
+// Line:  circle outline + center divider
+export function IconCircleHalfStroke({ solid, width = 16, height = 16, className }: IconProps) {
+  return solid ? (
+    <svg width={width} height={height} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className={className}>
+      <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.25" />
+      <path d="M8 2.5A5.5 5.5 0 0 0 8 13.5z" fill="currentColor" />
+    </svg>
+  ) : (
+    <svg width={width} height={height} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className={className}>
+      <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.25" />
+      <line x1="8" y1="2.5" x2="8" y2="13.5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 // ─── Bars — Figma node 16235:270 ─────────────────────────────────────────────
 export function IconBars({ solid, width = 16, height = 16, className }: IconProps) {
   return solid ? (

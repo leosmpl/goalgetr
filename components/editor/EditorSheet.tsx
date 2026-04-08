@@ -13,7 +13,7 @@ import UploadTab    from "./tabs/UploadTab";
 import TemplatesTab from "./tabs/TemplatesTab";
 import FiltersTab   from "./tabs/FiltersTab";
 import { TabBar, TabButton } from "./TabBar";
-import { IconCamera, IconCardsBlank, IconPalette, IconBars } from "@/components/ui/icons";
+import { IconCamera, IconCardsBlank, IconPalette, IconCircleHalfStroke } from "@/components/ui/icons";
 
 // ─── Tab config ───────────────────────────────────────────────────────────
 interface TabConfig {
@@ -26,7 +26,7 @@ const TABS: TabConfig[] = [
   { id: "upload",    label: "Upload",    icon: (s) => <IconCamera solid={s} width={18} height={18} />     },
   { id: "templates", label: "Templates", icon: (s) => <IconCardsBlank solid={s} width={18} height={18} /> },
   { id: "colors",    label: "Colors",    icon: (s) => <IconPalette solid={s} width={18} height={18} />    },
-  { id: "filters",   label: "Filters",   icon: (s) => <IconBars solid={s} width={18} height={18} />       },
+  { id: "filters",   label: "Filters",   icon: (s) => <IconCircleHalfStroke solid={s} width={18} height={18} /> },
 ];
 
 // ─── Tab panel slide variants ─────────────────────────────────────────────
