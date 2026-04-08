@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
+import { IconCamera } from "@/components/ui/icons";
 
 interface UploadTabProps {
   photoUrl: string | null;
@@ -75,11 +76,7 @@ export default function UploadTab({ photoUrl, onPhotoChange }: UploadTabProps) {
           className="flex flex-col items-center justify-center gap-space-3 rounded-radius-5 border-2 border-dashed border-border-secondary text-text-tertiary hover:border-border-tertiary hover:text-text-secondary transition-colors duration-200"
           style={{ height: "160px" }}
         >
-          {/* Camera icon */}
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-            <circle cx="12" cy="13" r="4" />
-          </svg>
+          <IconCamera width={28} height={28} />
           <span className="text-size-sm font-medium">Upload Photo</span>
           <span className="text-size-xs opacity-60">JPG, PNG · max 5 MB</span>
         </button>

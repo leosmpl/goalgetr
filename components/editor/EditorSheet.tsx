@@ -13,70 +13,7 @@ import UploadTab    from "./tabs/UploadTab";
 import TemplatesTab from "./tabs/TemplatesTab";
 import FiltersTab   from "./tabs/FiltersTab";
 import { TabBar, TabButton } from "./TabBar";
-
-
-// ─── Tab icons (sourced from Figma node 17786:9512) ───────────────────────
-
-function CameraIcon({ solid }: { solid?: boolean }) {
-  return solid ? (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M20 5h-2.586l-2-2H8.586l-2 2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm-8 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/>
-    </svg>
-  ) : (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-      <circle cx="12" cy="13" r="4" />
-    </svg>
-  );
-}
-
-function CardsIcon({ solid }: { solid?: boolean }) {
-  return solid ? (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect x="2" y="4" width="13" height="17" rx="2"/>
-      <path d="M17 7h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-3V7z" opacity="0.5"/>
-    </svg>
-  ) : (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="2" y="4" width="13" height="17" rx="2" />
-      <path d="M17 7h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-3" />
-    </svg>
-  );
-}
-
-function PaletteIcon({ solid }: { solid?: boolean }) {
-  return solid ? (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 8 6.5 8 8 8.67 8 9.5 7.33 11 6.5 11zm3-4C8.67 7 8 6.33 8 5.5S8.67 4 9.5 4s1.5.67 1.5 1.5S10.33 7 9.5 7zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 4 14.5 4s1.5.67 1.5 1.5S15.33 7 14.5 7zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 8 17.5 8s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
-    </svg>
-  ) : (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="12" cy="12" r="10" />
-      <circle cx="8.5" cy="9.5" r="1.5" fill="currentColor" stroke="none" />
-      <circle cx="15.5" cy="9.5" r="1.5" fill="currentColor" stroke="none" />
-      <circle cx="12" cy="16" r="1.5" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
-function SlidersIcon({ solid }: { solid?: boolean }) {
-  return solid ? (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M3 5h2V3H3v2zm0 8h2v-2H3v2zm0 8h2v-2H3v2zm4 0h14v-2H7v2zm0-8h14v-2H7v2zm0-10v2h14V3H7z" opacity="0.4"/>
-      <circle cx="10" cy="6" r="2.5"/>
-      <circle cx="16" cy="14" r="2.5"/>
-    </svg>
-  ) : (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <line x1="4" y1="6" x2="20" y2="6" />
-      <line x1="4" y1="12" x2="20" y2="12" />
-      <line x1="4" y1="18" x2="20" y2="18" />
-      <circle cx="10" cy="6"  r="2" fill="var(--bg-secondary)" />
-      <circle cx="16" cy="12" r="2" fill="var(--bg-secondary)" />
-      <circle cx="8"  cy="18" r="2" fill="var(--bg-secondary)" />
-    </svg>
-  );
-}
+import { IconCamera, IconCardsBlank, IconPalette, IconBars } from "@/components/ui/icons";
 
 // ─── Tab config ───────────────────────────────────────────────────────────
 interface TabConfig {
@@ -86,10 +23,10 @@ interface TabConfig {
 }
 
 const TABS: TabConfig[] = [
-  { id: "upload",    label: "Upload",    icon: (s) => <CameraIcon solid={s} />  },
-  { id: "templates", label: "Templates", icon: (s) => <CardsIcon solid={s} />   },
-  { id: "colors",    label: "Colors",    icon: (s) => <PaletteIcon solid={s} /> },
-  { id: "filters",   label: "Filters",   icon: (s) => <SlidersIcon solid={s} /> },
+  { id: "upload",    label: "Upload",    icon: (s) => <IconCamera solid={s} width={18} height={18} />     },
+  { id: "templates", label: "Templates", icon: (s) => <IconCardsBlank solid={s} width={18} height={18} /> },
+  { id: "colors",    label: "Colors",    icon: (s) => <IconPalette solid={s} width={18} height={18} />    },
+  { id: "filters",   label: "Filters",   icon: (s) => <IconBars solid={s} width={18} height={18} />       },
 ];
 
 // ─── Tab panel slide variants ─────────────────────────────────────────────
