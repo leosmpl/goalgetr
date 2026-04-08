@@ -79,18 +79,14 @@ export function IconCardsBlank({ solid, width = 16, height = 16, className }: Ic
 }
 
 // ─── CircleHalfStroke ─────────────────────────────────────────────────────────
-// Solid: left half filled + circle outline
-// Line:  circle outline + center divider
 export function IconCircleHalfStroke({ solid, width = 16, height = 16, className }: IconProps) {
   return solid ? (
     <svg width={width} height={height} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className={className}>
-      <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.25" />
-      <path d="M8 2.5A5.5 5.5 0 0 0 8 13.5z" fill="currentColor" />
+      <path d="M12.5 8.5C12.5 6.01562 10.4844 4 8 4V13C10.4844 13 12.5 10.9844 12.5 8.5ZM2 8.5C2 6.36719 3.125 4.39844 5 3.32031C6.85156 2.24219 9.125 2.24219 11 3.32031C12.8516 4.39844 14 6.36719 14 8.5C14 10.6562 12.8516 12.625 11 13.7031C9.125 14.7812 6.85156 14.7812 5 13.7031C3.125 12.625 2 10.6562 2 8.5Z" fill="currentColor" />
     </svg>
   ) : (
     <svg width={width} height={height} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className={className}>
-      <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.25" />
-      <line x1="8" y1="2.5" x2="8" y2="13.5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+      <path d="M12.875 8.5C12.875 5.82812 10.6719 3.625 8 3.625V13.375C10.6719 13.375 12.875 11.1953 12.875 8.5ZM2 8.5C2 6.36719 3.125 4.39844 5 3.32031C6.85156 2.24219 9.125 2.24219 11 3.32031C12.8516 4.39844 14 6.36719 14 8.5C14 10.6562 12.8516 12.625 11 13.7031C9.125 14.7812 6.85156 14.7812 5 13.7031C3.125 12.625 2 10.6562 2 8.5Z" fill="currentColor" />
     </svg>
   );
 }
