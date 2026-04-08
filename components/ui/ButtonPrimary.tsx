@@ -47,9 +47,9 @@ const SIZE: Record<ButtonSize, {
   iconSize: string;
   text:     string;
 }> = {
-  sm: { minH: "min-h-[32px]", px: "px-[var(--space-2)]",  iconSize: "size-5", text: "text-size-sm"   },
-  md: { minH: "min-h-[40px]", px: "px-[var(--space-2)]",  iconSize: "size-6", text: "text-size-sm"   },
-  lg: { minH: "min-h-[48px]", px: "px-[var(--space-3)]",  iconSize: "size-7", text: "text-size-base" },
+  sm: { minH: "min-h-space-8",  px: "px-[var(--space-2)]", iconSize: "size-5", text: "text-size-sm"   },
+  md: { minH: "min-h-space-10", px: "px-[var(--space-2)]", iconSize: "size-6", text: "text-size-sm"   },
+  lg: { minH: "min-h-space-12", px: "px-[var(--space-3)]", iconSize: "size-7", text: "text-size-base" },
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -83,7 +83,7 @@ export default function ButtonPrimary({
         focus-visible:ring-offset-bg-primary
         ${fullWidth ? "w-full" : ""}
         ${disabled
-          ? "bg-[rgba(255,255,255,0.05)] cursor-not-allowed"
+          ? "bg-white/5 cursor-not-allowed"
           : "bg-bg-brand-primary cursor-pointer"
         }
         ${className}

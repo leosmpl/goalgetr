@@ -31,7 +31,7 @@ function HexBadge({ badge }: { badge: BadgeType }) {
           {BADGE_ICONS[badge]}
         </span>
       </div>
-      <span className="text-[8px] font-bold uppercase tracking-wider text-fg-tertiary">
+      <span className="text-size-3xs font-bold uppercase tracking-wider text-fg-tertiary">
         {badge}
       </span>
     </div>
@@ -56,7 +56,7 @@ export default function CardBack({ card, overallRating }: CardBackProps) {
         <span className="text-size-7xl font-black leading-none text-fg-inverse">
           {overallRating}
         </span>
-        <span className="text-[10px] font-bold tracking-[0.2em] text-text-brand uppercase">
+        <span className="text-size-2xs font-bold tracking-[0.2em] text-text-brand uppercase">
           GG
         </span>
       </div>

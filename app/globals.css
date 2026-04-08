@@ -89,12 +89,15 @@
   --space-16:  64px;
   --space-20:  80px;
   --space-24:  96px;
+  --space-27:  108px;
   --space-32:  128px;
 
   /* ── Typography — Tokens/4.Typography.json ── */
   --font-sans:    "Geist", system-ui, sans-serif;
   --font-mono:    ui-monospace, "Geist Mono", monospace;
 
+  --text-3xs:   8px;   --lh-3xs:   12px;
+  --text-2xs:   10px;  --lh-2xs:   14px;
   --text-xs:    12px;  --lh-xs:    16px;
   --text-sm:    14px;  --lh-sm:    20px;
   --text-base:  16px;  --lh-base:  24px;
@@ -106,6 +109,12 @@
   --text-5xl:   48px;  --lh-5xl:   48px;
   --text-6xl:   60px;  --lh-6xl:   60px;
   --text-7xl:   72px;  --lh-7xl:   72px;
+
+  /* ── Semantic component tokens ── */
+  --overlay-gradient: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+  --device-shadow:    0 32px 80px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06);
+  --card-width:       220px;
+  --card-height:      340px;
 }
 
 /* ─────────────────────────────────────────────────────────────

@@ -86,8 +86,8 @@ export default function FiltersTab({
           aria-label="Background blur amount"
         />
         <div className="flex justify-between">
-          <span className="text-[10px] text-text-tertiary">None</span>
-          <span className="text-[10px] text-text-tertiary">Max</span>
+          <span className="text-size-2xs text-text-tertiary">None</span>
+          <span className="text-size-2xs text-text-tertiary">Max</span>
         </div>
       </div>
 

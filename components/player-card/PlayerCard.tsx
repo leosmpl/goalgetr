@@ -33,7 +33,8 @@ export default function PlayerCard({
 }: PlayerCardProps) {
   return (
     <div
-      className="card-scene w-[220px] h-[340px] cursor-pointer select-none"
+      className="card-scene cursor-pointer select-none"
+      style={{ width: "var(--card-width)", height: "var(--card-height)" }}
       onClick={onFlip}
       role="button"
       aria-label={isFlipped ? "Flip to card front" : "Flip to card back"}

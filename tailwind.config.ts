@@ -86,6 +86,7 @@ const config: Config = {
         "space-16": "64px",
         "space-20": "80px",
         "space-24": "96px",
+        "space-27": "108px",
         "space-32": "128px",
       },
 
@@ -110,6 +111,8 @@ const config: Config = {
         geist: ["var(--font-geist-sans)", "sans-serif"],
       },
       fontSize: {
+        "size-3xs":  ["8px",  { lineHeight: "12px" }],
+        "size-2xs":  ["10px", { lineHeight: "14px" }],
         "size-xs":   ["12px", { lineHeight: "16px" }],
         "size-sm":   ["14px", { lineHeight: "20px" }],
         "size-base": ["16px", { lineHeight: "24px" }],

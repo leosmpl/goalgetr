@@ -44,13 +44,13 @@ export default function ColorSwatch({
       aria-pressed={selected}
       className={`
         relative flex flex-col items-stretch overflow-hidden
-        w-[108px] h-[108px] shrink-0
+        w-space-27 h-space-27 shrink-0
         rounded-[var(--radius-5)]
         border transition-colors duration-150
         focus-visible:outline-none focus-visible:ring-2
         focus-visible:ring-bg-brand-primary focus-visible:ring-inset
         ${selected
-          ? "border-white bg-[rgba(255,255,255,0.10)]"
+          ? "border-white bg-white/10"
           : "border-border-primary bg-transparent"
         }
         ${className}

@@ -96,7 +96,7 @@ function ClassicFront({ card }: { card: PlayerCardData }) {
           {card.number}
         </span>
         {/* Position badge */}
-        <span className="absolute top-space-2 right-space-2 z-10 text-[10px] font-bold uppercase tracking-wider bg-bg-primary/60 text-fg-primary px-space-2 py-[3px] rounded-radius-full">
+        <span className="absolute top-space-2 right-space-2 z-10 text-size-2xs font-bold uppercase tracking-wider bg-bg-primary/60 text-fg-primary px-space-2 py-[3px] rounded-radius-full">
           {card.position}
         </span>
       </div>
@@ -131,7 +131,7 @@ function ModernFront({ card }: { card: PlayerCardData }) {
       {/* Gradient overlay at bottom */}
       <div
         className="absolute inset-x-0 bottom-0 h-28 z-10"
-        style={{ background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%)" }}
+        style={{ background: "var(--overlay-gradient)" }}
       />
 
       {/* Text overlay */}
@@ -158,7 +158,7 @@ function ModernFront({ card }: { card: PlayerCardData }) {
       </div>
 
       {/* Position badge */}
-      <span className="absolute top-space-2 right-space-2 z-20 text-[10px] font-bold uppercase tracking-wider bg-bg-primary/60 text-fg-primary px-space-2 py-[3px] rounded-radius-full">
+      <span className="absolute top-space-2 right-space-2 z-20 text-size-2xs font-bold uppercase tracking-wider bg-bg-primary/60 text-fg-primary px-space-2 py-[3px] rounded-radius-full">
         {card.position}
       </span>
     </div>
@@ -207,7 +207,7 @@ function StatsFront({ card }: { card: PlayerCardData }) {
               {card.firstName || "FIRST"}
             </span>
           )}
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-fg-inverse/60 truncate">
+          <span className="text-size-2xs font-semibold uppercase tracking-wider text-fg-inverse/60 truncate">
             {card.lastName || "LAST"}
           </span>
         </div>
@@ -226,7 +226,7 @@ function StatsFront({ card }: { card: PlayerCardData }) {
                   style={{ width: `${val}%` }}
                 />
               </div>
-              <span className="text-[10px] font-black text-fg-inverse tabular-nums flex-shrink-0">{val}</span>
+              <span className="text-size-2xs font-black text-fg-inverse tabular-nums flex-shrink-0">{val}</span>
             </div>
           ))}
         </div>

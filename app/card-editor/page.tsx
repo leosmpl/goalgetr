@@ -37,7 +37,7 @@ export default function CardEditorPage() {
           maxWidth: "100vw",
           maxHeight: "100dvh",
           borderRadius: "var(--radius-11)",
-          boxShadow: "0 32px 80px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06)",
+          boxShadow: "var(--device-shadow)",
         }}
       >
         {/* Safe Area overlays — float above all content */}

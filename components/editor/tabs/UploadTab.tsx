@@ -49,7 +49,7 @@ export default function UploadTab({ photoUrl, onPhotoChange }: UploadTabProps) {
             style={{ mixBlendMode: "multiply" }}
           />
           {/* BG Removed badge */}
-          <span className="absolute top-space-2 right-space-2 bg-bg-success-primary text-border-white text-[10px] font-bold uppercase tracking-wide px-space-2 py-[3px] rounded-radius-full">
+          <span className="absolute top-space-2 right-space-2 bg-bg-success-primary text-border-white text-size-2xs font-bold uppercase tracking-wide px-space-2 py-[3px] rounded-radius-full">
             BG Removed
           </span>
 

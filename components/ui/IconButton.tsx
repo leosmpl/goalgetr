@@ -53,7 +53,7 @@ const SIZE: Record<IconButtonSize, { box: string; iconBox: string }> = {
 
 const VARIANT_BASE: Record<IconButtonVariant, string> = {
   plain:   "",
-  soft:    "bg-[rgba(255,255,255,0.05)]",
+  soft:    "bg-white/5",
   primary: "bg-bg-brand-primary",
   outline: "border border-border-secondary",
 };
